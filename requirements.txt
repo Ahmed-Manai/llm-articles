@@ -1,0 +1,5 @@
+# Shared by every topic in this repository. Tested with Python 3.11 and google-genai 2.34.
+google-genai>=2.0
+numpy>=1.26
+python-dotenv>=1.0
+jupyter>=1.0

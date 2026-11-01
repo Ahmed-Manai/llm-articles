@@ -1,44 +1,67 @@
-# Embeddings and Dense Vector Search: A Practical Primer
+# LLM Articles
 
-[![Embeddings and Dense Vector Search](assets/cover.png)](article.md)
+Hands-on articles about how large language model (LLM) applications work, built from first principles. Each topic has a long-form article, a notebook that explains and runs the code, and a plain Python script.
 
-A beginner-friendly, technically careful introduction to **embeddings**: how text becomes vectors, how cosine similarity measures meaning, and how those pieces combine into **dense vector search** and retrieval-augmented generation (RAG).
+Everything runs on the **free tier of the Gemini API** with plain Python, without frameworks, so every step stays visible.
 
-**👉 [Read the full article](article.md)**
+## Topics
 
-## What's inside
+| # | Topic | Article | Notebook | Script | You will build |
+| --- | --- | --- | --- | --- | --- |
+| 01 | **Embeddings** | [Embeddings and Dense Vector Search](01-Embeddings/article.md) | [embeddings.ipynb](01-Embeddings/embeddings.ipynb) | [embeddings.py](01-Embeddings/embeddings.py) | cosine similarity, sentence comparisons, a tiny semantic search engine |
+| 02 | **RAG** | [RAG from Scratch](02-RAG/article.md) | [rag.ipynb](02-RAG/rag.ipynb) | [rag.py](02-RAG/rag.py) | a complete retrieval-augmented Q&A assistant with cited answers |
 
-- Why one-hot encoding fails and dense embeddings succeed
-- A toy geometric model of how embeddings capture relationships
-- Cosine similarity: the formula, a NumPy implementation, and how to read scores correctly
-- Real results from OpenAI's `text-embedding-3-small`, with notes on experimental design
-- A critical look at *king − man + woman ≈ queen*
-- A minimal semantic search engine in about 15 lines of Python, plus how it scales (HNSW, FAISS) and feeds RAG
-- Practical applications, limitations, and 13 references
+The topics build on each other: Part 2 uses the embeddings and vector search from Part 1.
 
-## Key takeaways
+[![Part 1: Embeddings](01-Embeddings/assets/cover.png)](01-Embeddings/article.md)
+[![Part 2: RAG from Scratch](02-RAG/assets/cover.png)](02-RAG/article.md)
 
-1. **Embeddings turn data into dense vectors where geometry encodes meaning.** Similar inputs land close together, and relationships become approximate directions.
-2. **Cosine similarity compares direction (−1 to 1).** For unit-length embeddings, such as OpenAI's, it equals the dot product.
-3. **Read scores relatively.** There is no universal threshold, and −1 does not mean "opposite meaning".
-4. **Dense vector search** means embedding your documents once, embedding each query, and ranking by similarity. This is the retrieval half of RAG.
+## Quick start
 
-## Repository contents
-
-```
-.
-├── README.md      ← you are here
-├── article.md     ← the full article
-└── assets/        ← diagrams used in the article
-    ├── cover.png
-    ├── sparse-vs-dense.png
-    ├── semantic-space.png
-    ├── cosine-similarity.png
-    ├── notebook-results.png
-    ├── vector-arithmetic.png
-    └── dense-search-pipeline.png
+```bash
+git clone https://github.com/Ahmed-Manai/llm-articles.git
+cd llm-articles
+pip install -r requirements.txt
+cp .env.example .env          # paste your free key from https://aistudio.google.com/apikey
+jupyter notebook              # open any topic's notebook
 ```
 
-## Running the code
+Or run a script directly from the repository root: `python 01-Embeddings/embeddings.py`.
 
-The article's examples need Python 3.9+, `numpy`, and `openai`. The API examples need an `OPENAI_API_KEY` environment variable. See [Section 4 of the article](article.md#4-hands-on-comparing-sentences-with-openai-embeddings).
+**Free tier notes:** limits are counted per project and per model, and you can see yours at <https://aistudio.google.com/rate-limit>. The code batches requests, retries automatically on temporary rate limits, and defaults to fast models with roomy quotas. You can override the models in `.env` with `GEMINI_CHAT_MODEL` and `GEMINI_EMBEDDING_MODEL`.
+
+## Repository layout
+
+```
+llm-articles/
+├── README.md            ← this index
+├── requirements.txt     ← shared Python dependencies
+├── .env.example         ← copy to .env and add your key (.env is git-ignored)
+├── 01-Embeddings/
+│   ├── README.md
+│   ├── article.md       ← the article
+│   ├── embeddings.ipynb ← explanations + runnable code + real outputs
+│   ├── embeddings.py    ← the same code as a script
+│   └── assets/          ← images used by the article
+└── 02-RAG/
+    ├── README.md
+    ├── article.md
+    ├── rag.ipynb
+    ├── rag.py
+    ├── utils/           ← the from-scratch RAG toolkit (loader, splitter, embeddings, vector DB, prompts, chat)
+    ├── data/            ← fictional knowledge base used in the demo
+    └── assets/
+```
+
+## Adding a new topic
+
+Every topic follows the same pattern, so the series stays easy to navigate:
+
+1. Create a folder named `NN-Topic` with the next number, for example `03-Agents`.
+2. Inside it, add `README.md`, `article.md`, `<topic>.ipynb`, `<topic>.py` and an `assets/` folder for images. Add `data/` or `utils/` only if the topic needs them.
+3. Keep the topic self-contained: it should run from its own folder with the shared `requirements.txt` and the root `.env`.
+4. Add a row to the **Topics** table above.
+
+## License
+
+No license has been chosen yet. Until one is added, all rights are reserved by the author.

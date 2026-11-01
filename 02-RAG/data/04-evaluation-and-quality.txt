@@ -1,0 +1,28 @@
+Atlas - How We Measure Answer Quality
+(Fictional document written for a RAG tutorial.)
+
+Why evaluation matters
+A RAG system can fail in two different places. Retrieval can fail, when the right passage is never found. Generation can fail, when the right passage is found but the model ignores it, misreads it, or adds information that is not in it. We measure both separately, because the fixes are different.
+
+The golden set
+The AI Platform team maintains a "golden set" of 400 real employee questions with reference answers written by the owners of the source documents. The golden set is refreshed every quarter: about 50 questions are replaced so that it keeps up with new policies.
+
+Retrieval metrics
+- Hit rate at 5: the share of questions where at least one of the five retrieved chunks contains the information needed. Target: at least 90%. Current value: 93%.
+- Mean reciprocal rank (MRR): rewards systems that put the correct chunk near the top of the list. Current value: 0.71.
+
+Generation metrics
+- Faithfulness: the share of answer sentences that are supported by the retrieved context. An answer that adds a fact not found in the context counts as unfaithful, even if the fact happens to be true. Target: at least 95%. Current value: 96%.
+- Answer correctness: judged against the reference answer. Current value: 73%.
+- Refusal accuracy: when the golden set contains a question that the documents cannot answer, Atlas should say "I don't know". Current value: 88%.
+
+LLM-as-a-judge
+Faithfulness and correctness are scored automatically by a separate language model acting as a judge, using a written grading rubric. Every month, two engineers hand-grade a random sample of 60 answers to check that the judge still agrees with people. If agreement drops below 85%, the rubric is revised.
+
+Release gate
+A change to Atlas (a new prompt, a new chunk size, a new model) may only be released if it does not lower any metric by more than 2 percentage points on the golden set. This rule stopped two releases in 2026: one where a cheaper model raised the hallucination rate, and one where a larger chunk size reduced the hit rate.
+
+Common failure patterns
+1. Outdated documents: two versions of a policy exist and the older one is retrieved. Fix: index only the latest version and show the last-updated date in citations.
+2. Questions with acronyms: employees ask about "PTO" while the handbook says "paid leave". Fix: hybrid search, which combines keyword search with embedding search.
+3. Multi-part questions: "What is the travel budget and who approves it?" needs two different documents. Fix: the query is split into sub-questions before retrieval.

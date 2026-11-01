@@ -1,0 +1,26 @@
+Brightwave Labs - Employee FAQ
+(Fictional document written for a RAG tutorial.)
+
+How many vacation days do I get?
+Full-time employees receive 25 days of paid leave per year, plus local public holidays. After three years at Brightwave you receive two extra days. Unused days can be carried over until 31 March of the following year.
+
+Can I work remotely?
+Yes. Brightwave is "remote-first with anchor days": you may work from anywhere in a country where we have an office (Portugal, Spain, Ireland or the Netherlands), but each team chooses one anchor day per week when everyone works from the office. Working from another country for more than 20 days per year requires approval from People Operations.
+
+What is the learning budget?
+Every employee has a yearly learning budget of 1,200 euros for courses, books and conferences. AI-related courses are pre-approved. Your manager approves other requests in the People portal.
+
+What is the travel budget and who approves it?
+The default travel budget is 150 euros per night for hotels and economy class for flights under six hours. Your manager approves trips inside Europe; trips outside Europe also need approval from the Finance team.
+
+Who do I contact about Atlas?
+For questions about Atlas, post in the #atlas-help channel. Wrong or harmful answers should be reported in #ai-incidents, as described in the Responsible AI Usage Policy.
+
+Can I paste customer data into Atlas?
+You may ask Atlas questions that mention Amber data, such as internal project names. You must never paste Red data (patient health information, nurse home addresses or payroll data) into Atlas or any other AI tool.
+
+What happens during onboarding?
+New employees spend their first week in the Lisbon office. Day one covers security training; day two covers the Responsible AI Usage Policy and a hands-on Atlas session; the rest of the week is spent with your team. Everyone is paired with an onboarding buddy for their first 60 days.
+
+What is Demo Friday?
+On the last Friday of every month, any team can present what it built in a 10-minute slot. The most popular demo of the quarter wins the Lighthouse award and a team dinner.

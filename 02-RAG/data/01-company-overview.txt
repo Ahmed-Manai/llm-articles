@@ -1,0 +1,24 @@
+Brightwave Labs - Company Overview
+(Fictional company. All names, numbers and policies in this knowledge base are invented for a RAG tutorial.)
+
+Who we are
+Brightwave Labs builds scheduling and route-planning software for home-care nurses. Our flagship product, CareRoute, plans the daily visits of more than 9,000 nurses across four countries. The company was founded in 2019 in Lisbon and today employs 240 people, of whom 85 work in engineering.
+
+How we use AI
+Brightwave started using large language models (LLMs) in 2023 for internal search and support drafting. Today AI shows up in three places:
+1. Atlas, our internal question-answering assistant, which answers employee questions using company documents. Atlas is built on retrieval-augmented generation (RAG).
+2. Visit Notes, a feature inside CareRoute that turns a nurse's voice memo into a structured visit summary. A nurse must review and approve every summary before it is saved.
+3. Support Drafts, which suggests replies to customer tickets. A human agent always edits and sends the final reply.
+
+Our guiding principle is "AI drafts, people decide". No AI system at Brightwave is allowed to take an action that affects a patient, a customer contract, or an employee's pay without a human approving it first.
+
+Teams that own AI work
+The AI Platform team (8 people, led by Ines Duarte) owns Atlas, the shared embedding service, the model gateway, and the evaluation pipeline. Product teams build features on top of the platform but may not call model providers directly; every request goes through the model gateway, which handles logging, cost tracking and redaction of personal data.
+
+The Responsible AI Council reviews new AI use cases. It meets every second Thursday and has five members: the CTO, the Head of Legal, the Data Protection Officer, the Head of Clinical Safety, and one rotating engineer chosen from outside the AI Platform team.
+
+Key numbers (as of the 2026 internal report)
+- Atlas answers about 1,800 employee questions per week.
+- 71% of Atlas answers are rated "helpful" by employees using the thumbs-up button.
+- Visit Notes saves nurses an average of 11 minutes per shift.
+- Monthly spend on model APIs is capped at 18,000 euros; the gateway blocks non-critical traffic once 90% of the cap is used.

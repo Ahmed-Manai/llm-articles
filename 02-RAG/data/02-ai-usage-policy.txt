@@ -1,0 +1,33 @@
+Brightwave Labs - Responsible AI Usage Policy (version 3.2)
+(Fictional document written for a RAG tutorial.)
+
+1. Purpose
+This policy explains how Brightwave employees may use generative AI tools at work. It applies to every employee, contractor and intern.
+
+2. Approved tools
+Employees may use the company's approved AI tools: Atlas (internal assistant), the AI features inside CareRoute, and the coding assistant available in our development environment. Using personal accounts on public chatbots for company work is not allowed, because we cannot control how those services store the data you paste into them.
+
+3. Data classes
+We classify data into three classes:
+- Green data: public information, such as published blog posts and marketing pages. Green data may be used with any approved tool.
+- Amber data: internal information, such as code, roadmaps and internal documents. Amber data may only be sent to models through the model gateway.
+- Red data: patient health information, nurse home addresses, and payroll data. Red data must never be sent to an external model provider. Red data may only be processed by models that run inside our own cloud account, and only for use cases approved by the Responsible AI Council.
+
+4. The Two-Source Rule
+Any fact produced by an AI system that will be shown to a customer or used in a clinical context must be confirmed by two independent sources before it is used. One of the sources may be the document the AI cited, but the second must be a human expert or a system of record (for example, the patient's care plan). We call this the Two-Source Rule. It exists because language models can produce fluent, confident text that is wrong, which is often called a hallucination.
+
+5. Approving a new model or vendor
+Adding a new model provider requires three approvals, in this order:
+a) a security review by the Security team, which checks data retention and encryption;
+b) a privacy review by the Data Protection Officer;
+c) final approval by the Responsible AI Council.
+The full process usually takes three to five weeks. Teams may run experiments with Green data only while the review is in progress.
+
+6. Disclosure
+Content generated mostly by AI must be labelled as AI-assisted when it is shared outside the company. Internal documents do not need a label, but the author remains fully responsible for their accuracy.
+
+7. Reporting problems
+If an AI system produces harmful, biased or clearly wrong output, report it in the #ai-incidents channel within 24 hours. Include the input, the output, and the time. Reports are reviewed by the AI Platform team every morning.
+
+8. Consequences
+Breaking this policy, in particular sending Red data to an external model, is treated as a security incident and may lead to disciplinary action.

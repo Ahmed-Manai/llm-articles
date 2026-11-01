@@ -1,0 +1,25 @@
+Atlas - Architecture of the Internal Q&A Assistant
+(Fictional design document written for a RAG tutorial.)
+
+Overview
+Atlas lets employees ask questions in plain language, such as "How many vacation days do I get?", and returns an answer with links to the documents it used. Atlas does not rely on what the language model memorised during training. Instead it retrieves relevant passages from our own documents and asks the model to answer using only those passages. This approach is called retrieval-augmented generation, or RAG.
+
+Ingestion pipeline (runs every night at 02:00 Lisbon time)
+1. Load: Atlas collects documents from the wiki, the HR handbook, the engineering runbooks and the policy library. About 6,500 documents are indexed.
+2. Clean: navigation menus, footers and duplicated pages are removed.
+3. Chunk: each document is split into chunks of about 800 tokens, with an overlap of 120 tokens between neighbouring chunks. The overlap keeps sentences that sit on a chunk boundary from losing their context. The team tested chunk sizes of 300, 800 and 1,500 tokens; 800 gave the best answer quality on our evaluation set, because smaller chunks lost context and larger chunks mixed several topics together.
+4. Embed: each chunk is converted into an embedding vector by the shared embedding service.
+5. Store: vectors are saved in a vector index together with metadata: the source document, its owner, its last-updated date and its data class (Green, Amber or Red). Red documents are never indexed.
+
+Query pipeline (runs for every question)
+1. The question is embedded with the same embedding model used during ingestion.
+2. Atlas retrieves the 20 most similar chunks using cosine similarity.
+3. A reranker model re-scores those 20 chunks and keeps the best 5. Reranking improved the share of correct answers from 64% to 73% in our tests.
+4. The 5 chunks are inserted into a prompt together with the question and strict instructions: answer only from the context, cite the source of every claim, and reply "I don't know" when the context does not contain the answer.
+5. The answer is returned to the employee with clickable citations.
+
+Access control
+Atlas filters retrieved chunks by the employee's permissions before they reach the model. An engineer cannot receive a chunk from a document that only the HR team can open, even if that chunk is the most similar one.
+
+Why not fine-tune instead?
+The team considered fine-tuning a model on company documents and rejected it for three reasons: documents change every day and re-training would always lag behind; a fine-tuned model cannot cite its sources; and removing a document from a fine-tuned model is not practical, while removing it from the index takes seconds.
